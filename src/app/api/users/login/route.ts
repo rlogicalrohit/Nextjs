@@ -17,7 +17,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "User does not exists" }, { status: 500 })
         }
         console.log("User Exists", user);
-
+        if (!user.isVerfied) {
+            return NextResponse.json({ error: "Please verify your email" }, { status: 400 })
+        }
         const validPassword = await brcyptjs.compare(password, user.password)
         if (!validPassword) {
             return NextResponse.json({ error: "Check your credentials" }, { status: 400 })

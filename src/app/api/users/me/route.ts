@@ -10,9 +10,13 @@ connect()
 export async function POST(request: NextRequest) {
     try {
         const userId = await getDataFromToken(request);
-        const user = User.findOne({ _id: userId }).select("-Password");
+        console.log("userId",userId);
+        
+        const user = await User.findOne({ _id: userId }).select("-password")
+        console.log("useruser",user);
+        
         return NextResponse.json({
-            message: "User Found",
+            message: "User Details Found",
             data: user
         })
     } catch (error: any) {

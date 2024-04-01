@@ -7,7 +7,7 @@ connect()
 
 export async function POST(request: NextRequest) {
     try {
-        console.log("CALLED");
+        console.log("VERIFYEMAIl      CALLED");
 
         const reqBody = await request.json();
         const { token } = reqBody;
@@ -19,11 +19,13 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid token" }, { status: 500 })
         }
 
-        user.isVerified = true;
+        user.isVerfied = true;
         user.verifyToken = undefined;
         user.verifyTokenExpiry = undefined;
 
-        await user.save();
+        const data = await user.save();
+        console.log("datadata", data);
+
         return NextResponse.json({ message: 'Email verfied Successfully...', success: true }, { status: 200 })
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 })
