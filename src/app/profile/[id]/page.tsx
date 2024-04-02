@@ -1,12 +1,9 @@
 'use client'
-
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function ProfilePage({ params }: any) {
 
-    const router = useRouter();
     const [id] = params.id;
     const [data, setData]: any = useState("nothing");
 
